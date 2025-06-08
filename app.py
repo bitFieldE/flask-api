@@ -1,13 +1,16 @@
-from flask import Flask, jsonify
+from flask import Flask
+from interface.routes import main_bp
 
-app = Flask(__name__)
+def create_app():
+  """Create and configure the Flask application."""
+  app = Flask(__name__)
+  register_blueprints(app)
+  return app
 
-@app.route('/api/v1/top')
-def top():
-    return jsonify({
-        "message": "Hello, Flask!",
-        "status": "success"
-    })
+def register_blueprints(app):
+  """Register Flask blueprints."""
+  app.register_blueprint(main_bp)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000)
+    app = create_app()
+    app.run(host="0.0.0.0", port=8000, debug=True)
