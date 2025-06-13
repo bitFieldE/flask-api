@@ -19,7 +19,7 @@ def create_app():
   register_blueprints(app)
   
   # Enable CORS
-  CORS(app)
+  CORS(app, resources={r"/api/*": {"origins": "*"}})
 
   return app
 
