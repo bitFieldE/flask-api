@@ -1,4 +1,14 @@
 services:
+  db:
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-flask-data:/var/lib/postgresql/data:cached
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
   web:
     build:
       context: .
@@ -10,18 +20,7 @@ services:
     environment:
       - FLASK_APP=app.py
       - FLASK_ENV=development
-
-  db:
-    image: postgres:16
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres-flask-data:/var/lib/postgresql/data:cached
-    environment:
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-
+      - SQLALCHEMY_DATABASE_URI=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB}
 volumes:
   postgres-flask-data:
     

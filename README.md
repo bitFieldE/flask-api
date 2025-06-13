@@ -2,7 +2,7 @@
 flaskでapiを実装
 
 ## 技術スタック
-- Python 3.8+
+- Python 3.13.3
 - Flask (Webフレームワーク)
 - SQLAlchemy (ORM)
 
@@ -16,10 +16,12 @@ CleanArchitectureに基づいたディレクトリ構成
 ├── Dockerfile
 ├── Dockerfile.dev
 ├── interface
+│   ├── extensions.py
 │   ├── models
 │   └── routes
 │       ├── __init__.py
 │       └── main.py
+├── Makefile
 ├── README.md
 ├── requirements-dev.txt
 └── requirements.txt
